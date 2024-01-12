@@ -25,7 +25,7 @@ class Cart with ChangeNotifier {
   String getTotalPrice() =>
       "${listArticles.fold(0, (prev, art) => prev + art.prix)/100}€";
 
-  String getTVAPrise() =>
+  String getTVAPrice() =>
     "${listArticles.fold(2, (prev, art) => prev + art.prix)/100*0.2}€";
 
   String getFinalPrice() =>

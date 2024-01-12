@@ -29,7 +29,7 @@ class PaymentPage extends StatelessWidget {
                   Container(height: 10), //C'est un saut de ligne j'ai pas cherché plus loin,
                   CardRecap(
                     prixTotal: cart.getFinalPrice(),
-                    prixTVA: cart.getTVAPrise(),
+                    prixTVA: cart.getTVAPrice(),
                     prixSousTotal: cart.getTotalPrice(),
                   ),
                   Container(height: 10),
@@ -44,7 +44,7 @@ class PaymentPage extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => SendingDatatoRandomAPI,
+                      onPressed: () => sending_data_to_random_api(),
 
                       child: const Text('Procéder au paiement'),
                     ),
@@ -58,10 +58,12 @@ class PaymentPage extends StatelessWidget {
   }
 }
 
-
-Future<void> SendingDatatoRandomAPI() async {
+//Pas sur de celle-ci
+Future<void> sending_data_to_random_api() async {
   final response = await http.post(
-    Uri.parse('https://JaipasdideesdURL.com'),
+    //Uri.parse('https://JaipasdideesdURL.com'),
+    Uri.parse('http://ptsv3.com/t/EPSISHOPC2/'),
+
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -74,7 +76,7 @@ Future<void> SendingDatatoRandomAPI() async {
     ),
   );
 
-  if (response.statusCode == 201) {
+  if (response.statusCode == 200) {
     print(response.body);
   } else {
     throw Exception('Dommage');
